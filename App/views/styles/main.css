@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+:root {
+  --primary: #900C3F;
+  --light: #FFF5E0;
+  --grey: #4d4d4d;
+}
+
+body {
+  overflow: hidden;
+  font-weight: 300;
+  color: var(--light);
+  overflow-y: scroll !important;
+}
+
+.pag:hover,
+.pag {
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+
+#sidebar-container {
+  min-height: 100vh;
+}
+
+#sidebar-container .logo {
+  padding: 0.875rem 1.25rem !important;
+  color: var(--light) !important;
+}
+#sidebar-container .menu {
+  width: 14rem !important;
+  padding-left: 10px;
+}
+
+.bx {
+  margin: 2px;
+  padding-right: 4px;
+}
+
+.container {
+  padding: 30px;
+}
+.container-add {
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.center {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.card-add{
+  background-color: #ffffffed;
+
+}
+.css-button-3d--blue {
+  width: 300px;
+  min-width: 130px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  background: #c70039;
+  box-shadow: 0 5px #6e001f;
+  text-decoration: none;
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+.css-button-3d--blue:hover {
+  box-shadow: 0 3px #6e001f;
+  top: 1px;
+}
+.css-button-3d--blue:active {
+  box-shadow: 0 0 #6e001f;
+  top: 5px;
+}
+
+.cont {
+  height: 100vh !important;
+}
+.centered {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.titulo {
+  justify-content: space-between;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+span {
+  font-weight: bold;
+}
+
+td {
+  font-weight: bold;
+}
