@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>personas</title>
+    <title>Candidatos</title>
     <link rel="icon" type="image/png" href="favIcon.png">
 
     <!-- Boostrap -->
@@ -22,42 +22,56 @@
     <div class="d-flex">
         <div class="container cont">
             <div class="titulo d-flex">
-                <h1 class="text-dark">BASE DE DATOS (PERSONAS)</h1>
-                <a href="/addPersona" class="css-button-3d--blue">Añadir persona</a>
+                <h1 class="text-dark">BASE DE DATOS (CANDIDATOS)</h1>
+                <a href="/addCandidato" class="css-button-3d--blue">Añadir candidato</a>
             </div>
 
             <table class="table table-bordered table-striped text-center mt-4">
                 <thead>
                     <tr class="bg-primary text-white">
-                        <th scope="col">Tipo</th>
-                        <th scope="col">documento</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Dirección</th>
                         <th scope="col">Email</th>
-                        <th scope="col">celular</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Documento</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha Nacimiento</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% response.forEach((data)=>{ %>
                         <tr>
                             <td>
+                                <%= data.USUARIO %>
+                            </td>
+                            <td>
                                 <%= data.IDTIPODOC %>
                             </td>
                             <td>
-                                <%= data.NDOCUMENTO %>
+                                <%= data.NDOC %>
                             </td>
                             <td>
                                 <%= data.NOMBRE %>
                                     <%= data.APELLIDO %>
                             </td>
                             <td>
-                                <%= data.DIRECCION %>
-                            </td>
-                            <td>
-                                <%= data.CORREO %>
-                            </td>
-                            <td>
-                                <%= data.CELULAR %>
+                                <script>
+                                    // Función para formatear la fecha en formato día/mes/año
+                                    function formatFecha(fecha) {
+                                        var fechaObj = new Date(fecha);
+                                        var dia = fechaObj.getDate();
+                                        var mes = fechaObj.getMonth() + 1; // Sumar 1 porque los meses empiezan en 0
+                                        var año = fechaObj.getFullYear();
+
+                                        // Agregar ceros a la izquierda si es necesario
+                                        dia = dia < 10 ? '0' + dia : dia;
+                                        mes = mes < 10 ? '0' + mes : mes;
+
+                                        // Devolver la fecha formateada como una cadena
+                                        return dia + '/' + mes + '/' + año;
+                                    }
+
+                                    // Mostrar la fecha formateada en la tabla
+                                    document.write(formatFecha("<%= data.FECHANAC %>"));
+                                </script>
                             </td>
                         </tr>
                         <% }); %>

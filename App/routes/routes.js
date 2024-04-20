@@ -1,14 +1,14 @@
 const { Router } = require("express")
-const {getPersonas, crearPersona, getTipoDoc} = require('../controllers/index.controller')
+const {getCandidatos, crearCandidato, getTipoDoc} = require('../controllers/index.controller')
 const router = Router();
 
-router.get('/personas', (req, res) => {
-    getPersonas(req,res);    
+router.get('/candidatos', (req, res) => {
+    getCandidatos(req,res);    
 });
-router.get('/addPersona', (req, res) => {
+router.get('/addCandidato', (req, res) => {
     getTipoDoc(req, res);
 });
-router.post('/addPersona', (req, res) => {
-    crearPersona(req.body, res);
+router.post('/addCandidato', (req, res) => {
+    crearCandidato(req.body, res);
 });
 module.exports = router;

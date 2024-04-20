@@ -2,8 +2,8 @@ const oracledb = require("oracledb");
 const conf = require('../config/config')
 oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
 
-// Obtiene las personas actualmente registradas en la base de datos
-const getPersonas = async (req, res) => {
+// Obtiene las candidatos actualmente registradas en la base de datos
+const getCandidatos = async (req, res) => {
     let con;
     try{
         con = await oracledb.getConnection({
@@ -13,7 +13,7 @@ const getPersonas = async (req, res) => {
         });
     
         const data = await con.execute(
-            `SELECT * FROM PERSONA`,
+            `SELECT * FROM CANDIDATO`,
         );
         const response = data.rows;
         res.render('index', {response})
@@ -37,17 +37,17 @@ const getTipoDoc = async (req, res) => {
             `SELECT * FROM TIPODOC`,
         );
         response = data.rows;
-        res.render('addPersona', {response});
+        res.render('addCandidato', {response});
     } catch (err) {
         console.log(err);
     }
 }
 
-// Ingresa una persona en la base de datos 
-// tambien valida que la persona no este registrada
+// Ingresa un candidato en la base de datos 
+// tambien valida el candidato no este registrada
 // previamente 
 
-const crearPersona = async (persona, res) => {
+const crearCandidato = async (candidato, res) => {
     let con;
     try{
         con = await oracledb.getConnection({
@@ -56,30 +56,28 @@ const crearPersona = async (persona, res) => {
             connectionString:   conf.connectionString
         });
         const validar = await con.execute(
-            `SELECT * FROM PERSONA WHERE NDOCUMENTO = :1
-            AND IDTIPODOC = :2`,
-            [persona.documento, persona.tipoDoc]
+            `SELECT * FROM CANDIDATO WHERE USUARIO = :1`,
+            [candidato.usuario]
         );
         if (validar.rows.length === 0) {
             const data = await con.execute(
-                `INSERT INTO PERSONA VALUES (
-                    :1, :2, :3, :4, :5, :6, :7
+                `INSERT INTO CANDIDATO VALUES (
+                    :1, :2, :3, :4, :5, TO_DATE(:6, 'YYYY-MM-DD') 
                 )`,
                 [
-                    persona.tipoDoc,
-                    persona.documento,
-                    persona.nombre,
-                    persona.apellido,
-                    persona.direccion,
-                    persona.email,
-                    persona.celular,
+                    candidato.usuario, 
+                    candidato.tipoDoc,
+                    candidato.nDoc, 
+                    candidato.nombre, 
+                    candidato.apellido, 
+                    candidato.fechaNac
                 ]
             );
             con.commit();
-            res.redirect('personas')
+            res.redirect('candidatos')
         } else {
             // Redirigir a una advertencia 
-            res.render('excepPersona', {persona})
+            res.render('excepCandidato', {candidato})
         }
     } catch (err) {
         console.log(err);
@@ -87,9 +85,9 @@ const crearPersona = async (persona, res) => {
 };
 
 module.exports = {
-    getPersonas,
+    getCandidatos,
     getTipoDoc,
-    crearPersona,
+    crearCandidato,
 };
 
 

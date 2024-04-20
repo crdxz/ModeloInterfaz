@@ -1,36 +1,35 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 12c                           */
-/* Created on:     15/10/2023 10:40:38 p. m.                    */
+/* Created on:     19/04/2024 5:01:19 p. m.                     */
 /*==============================================================*/
 
 
-alter table PERSONA
-   drop constraint FK_PERSONA_PT_TIPODOC;
+alter table CANDIDATO
+   drop constraint FK_CANDIDATO_PT_TIPODOC;
 
 drop index PT_FK;
 
-drop table PERSONA cascade constraints;
+drop table CANDIDATO cascade constraints;
 
 drop table TIPODOC cascade constraints;
 s
 /*==============================================================*/
-/* Table: PERSONA                                               */
+/* Table: CANDIDATO                                               */
 /*==============================================================*/
-create table PERSONA (
+create table CANDIDATO (
+   USUARIO              VARCHAR2(30)          not null,
    IDTIPODOC            VARCHAR2(3)           not null,
-   NDOCUMENTO           VARCHAR2(12)          not null,
+   NDOC                 NUMBER(15)            not null,
    NOMBRE               VARCHAR2(30)          not null,
    APELLIDO             VARCHAR2(30)          not null,
-   DIRECCION            VARCHAR2(30)          not null,
-   CORREO               VARCHAR2(50)          not null,
-   CELULAR              VARCHAR2(15)          not null,
-   constraint PK_PERSONA primary key (IDTIPODOC, NDOCUMENTO)
+   FECHANAC             DATE                  not null,
+   constraint PK_CANDIDATO primary key (USUARIO)
 );
 
 /*==============================================================*/
 /* Index: PT_FK                                                 */
 /*==============================================================*/
-create index PT_FK on PERSONA (
+create index PT_FK on CANDIDATO (
    IDTIPODOC ASC
 );
 
@@ -43,7 +42,7 @@ create table TIPODOC (
    constraint PK_TIPODOC primary key (IDTIPODOC)
 );
 
-alter table PERSONA
-   add constraint FK_PERSONA_PT_TIPODOC foreign key (IDTIPODOC)
+alter table CANDIDATO
+   add constraint FK_CANDIDATO_PT_TIPODOC foreign key (IDTIPODOC)
       references TIPODOC (IDTIPODOC);
 
